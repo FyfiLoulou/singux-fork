@@ -1,5 +1,9 @@
 package org.yes.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  * @author Félix Blanchette
  * @version 1
@@ -12,6 +16,7 @@ package org.yes.Model;
 public class Dons {
 
     private double totalDons; // le total des dons effectués
+    private List<Double> dons = new ArrayList<>();
 
 
     public Dons() {
@@ -21,7 +26,7 @@ public class Dons {
     /**
      * Permet d'additionner un don au total de dons
      *
-     * @param montant le montant de la facture qui sert à calculer le montant du don
+     * @param montant       le montant de la facture qui sert à calculer le montant du don
      * @param modePaiements le mode de paiement qui sert à calculer le montant du don
      * @return le nouveau total de dons
      */
@@ -29,15 +34,15 @@ public class Dons {
         double nouveauDon;
         double fraisModePaiement = 0;
 
-        if (modePaiements == ModePaiements.DEBIT){
+        if (modePaiements == ModePaiements.DEBIT) {
             fraisModePaiement = montant * 0.01;
-        }
-        else if (modePaiements == ModePaiements.CREDIT) {
+        } else if (modePaiements == ModePaiements.CREDIT) {
             fraisModePaiement = montant * 0.03;
         }
 
         nouveauDon = 0.02 * (montant - fraisModePaiement);
 
+        dons.add(nouveauDon);
         return this.totalDons += nouveauDon;
     }
 
@@ -53,5 +58,13 @@ public class Dons {
      */
     public double getTotalDons() {
         return totalDons;
+    }
+
+    public List<Double> getDons() {
+        return dons;
+    }
+
+    public void setDons(List<Double> dons) {
+        this.dons = dons;
     }
 }

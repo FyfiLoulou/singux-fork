@@ -3,28 +3,30 @@ package org.yes.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import org.yes.Model.Dons;
 import org.yes.Model.Facture;
 import org.yes.Model.FacturesFactory;
 import org.yes.Model.ModePaiements;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author Maek Lorman
  * Classe AppGraphicalController
  * cette classe s'occupe d'aller chercher des informations importantes pour la facture
  */
-public class AppGraphicalController extends AppController{
-
-    FacturesFactory facturesFactory = new FacturesFactory();
-    Dons dons = new Dons();
-    private static final DecimalFormat decfor = new DecimalFormat("0.00");
+public class AppGraphicalController extends AppController {
 
     @FXML
     public Text montantDons;
+    public TextArea textArea;
     @FXML
     private TextField nomAcheteur;
     @FXML
@@ -51,18 +53,18 @@ public class AppGraphicalController extends AppController{
     private Text erreurMontantSansTaxes;
     @FXML
     private Text erreurTaxes;
-
-
+    FacturesFactory facturesFactory = new FacturesFactory();
+    Dons dons = new Dons();
+    public static final DecimalFormat decfor = new DecimalFormat("0.00");
 
     @FXML
     private void initialize() {
         // afficher total
-
         montantSansTaxes.setOnKeyReleased(event -> afficherMontantTotal());
         taxes.setOnKeyReleased(event -> afficherMontantTotal());
 
         // bouton creer facture
-        creer.setOnMouseClicked(event->{
+        creer.setOnMouseClicked(event -> {
             String nomAcheteur = getNomAcheteur();
             double montantSansTaxes = getMontantSansTaxes();
             double taxes = getMontantTaxes();
@@ -77,9 +79,10 @@ public class AppGraphicalController extends AppController{
 
             if (erreurs == "") {
                 Facture facture = facturesFactory.build(nomAcheteur, montantSansTaxes, modePaiement, taxes); // création d'une facture
-                afficherDons(dons.ajouterDons(montantSansTaxes+taxes, modePaiement)); // ajout et affichage des dons
+                afficherDons(dons.ajouterDons(montantSansTaxes + taxes, modePaiement)); // ajout et affichage des dons
                 rafraichirPage();
-                System.out.println("Nouvelle Facture Créée: "+facture.toString());
+                afficherDernierDon();
+                System.out.println("Nouvelle Facture Créée: " + facture.toString());
             }
         });
 
@@ -97,11 +100,11 @@ public class AppGraphicalController extends AppController{
     }
 
     private void afficherMontantTotal() {
-            montantTotal.textProperty().setValue(
-                    !verificationChamps().contains("montantTaxes") && !verificationChamps().contains("montantSansTaxes") ?
-                            decfor.format(getMontantSansTaxes()+getMontantTaxes())+"$"
-                            : "inconnu"
-            );
+        montantTotal.textProperty().setValue(
+                !verificationChamps().contains("montantTaxes") && !verificationChamps().contains("montantSansTaxes") ?
+                        decfor.format(getMontantSansTaxes() + getMontantTaxes()) + "$"
+                        : "inconnu"
+        );
     }
 
     private void rafraichirPage() {
@@ -115,6 +118,7 @@ public class AppGraphicalController extends AppController{
         erreurMontantSansTaxes.textProperty().setValue("");
         erreurTaxes.textProperty().setValue("");
     }
+
     private void setNomAcheteur(String nom) {
         nomAcheteur.textProperty().setValue(nom);
     }
@@ -150,7 +154,11 @@ public class AppGraphicalController extends AppController{
      * @return -> le montant de l'achat sans les taxes et dons ou -1 si invalide
      */
     private double getMontantSansTaxes() {
-        return Facture.verificationFormatArgent(montantSansTaxes.textProperty().getValue());
+        double montant = Facture.verificationFormatArgent(montantSansTaxes.textProperty().getValue());
+        if (montant > 15000) {
+            return -1;
+        }
+        return montant;
     }
 
     /**
@@ -173,8 +181,13 @@ public class AppGraphicalController extends AppController{
         return modePaiement;
     }
 
-
     private void afficherDons(double montant) {
         montantDons.setText("Total: " + decfor.format(montant) + "$");
+    }
+
+    private void afficherDernierDon() {
+        List<Double> donAAfficher = dons.getDons();
+        String valeur = textArea.textProperty().getValue();
+        textArea.textProperty().setValue(valeur + decfor.format(donAAfficher.get(donAAfficher.size() - 1)) + "\n");
     }
 }

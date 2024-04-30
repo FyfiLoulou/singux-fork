@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,115 +12,130 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.yes.Controller.AppGraphicalController">
-   <children>
-      <AnchorPane id="title" prefHeight="50.0" prefWidth="600.0" style="-fx-border-color: black; -fx-background-color: #dbfbcb;">
-         <children>
-            <Text fill="#292929" layoutX="227.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TopVente Inc.">
-               <font>
-                  <Font size="31.0" />
-               </font></Text>
-         </children>
-      </AnchorPane>
-      <AnchorPane id="container" prefHeight="350.0" prefWidth="600.0" style="-fx-border-color: black; -fx-background-color: #292929;">
-         <children>
-            <Text fill="#dbfbcb" layoutX="210.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Création d'une facture">
-               <font>
-                  <Font size="19.0" />
-               </font></Text>
-            <TextField fx:id="nomAcheteur" layoutX="213.0" layoutY="86.0" prefHeight="26.0" prefWidth="182.0" promptText="Entrez le nom de l'acheteur" />
-            <Label layoutX="248.0" layoutY="59.0" text="Nom de l'acheteur" textFill="#dbfbcb">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <TextField fx:id="montantSansTaxes" layoutX="278.0" layoutY="160.0" prefHeight="26.0" prefWidth="50.0" promptText="0.00$" text="0.00"/>
-            <Label layoutX="244.0" layoutY="135.0" text="Montant sans taxes" textFill="#dbfbcb">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <TextField fx:id="taxes" layoutX="275.0" layoutY="242.0" prefHeight="25.0" prefWidth="50.0" promptText="0.00$" text="0.00"/>
-            <Label layoutX="245.0" layoutY="203.0" prefHeight="36.0" prefWidth="120.0" text="Montant des taxes" textFill="#dbfbcb">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Button layoutX="337.0" layoutY="300.0" mnemonicParsing="false" style="-fx-background-color: #dbfbcb;" text="Créer" fx:id="creer" textFill="#292929" />
-            <Button layoutX="227.0" layoutY="300.0" mnemonicParsing="false" style="-fx-background-color: #dbfbcb;" text="Rafraichir" fx:id="rafraichir" textFill="#292929" />
-            <Pane layoutX="14.0" layoutY="13.0" prefHeight="293.0" prefWidth="170.0" style="-fx-background-color: #dbfbcb;">
-               <children>
-                  <Text fill="#292929" layoutX="5.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode de Paiement">
-                     <font>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.yes.Controller.AppGraphicalController">
+    <children>
+        <AnchorPane id="title" prefHeight="50.0" prefWidth="600.0" style="-fx-border-color: black; -fx-background-color: #dbfbcb;">
+            <children>
+                <Text fill="#292929" layoutX="227.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TopVente Inc.">
+                    <font>
+                        <Font size="31.0" />
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+        <AnchorPane id="container" prefHeight="408.0" prefWidth="918.0" style="-fx-border-color: black; -fx-background-color: #292929;">
+            <children>
+                <Text fill="#dbfbcb" layoutX="210.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Création d'une facture">
+                    <font>
                         <Font size="19.0" />
-                     </font>
-                  </Text>
-                  <RadioButton layoutX="9.0" layoutY="104.0" mnemonicParsing="false" fx:id="argent" id="ARGENT" text="Argent" textFill="#292929">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="ModePaiement" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton layoutX="8.0" layoutY="150.0" mnemonicParsing="false" fx:id="debit" id="DEBIT" text="Débit" textFill="#292929" toggleGroup="$ModePaiement">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="8.0" layoutY="194.0" mnemonicParsing="false" fx:id="credit" id="CREDIT" text="Crédit" textFill="#292929" toggleGroup="$ModePaiement">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </RadioButton>
-                  <Text fill="RED" layoutX="8.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="erreurModePaiement" wrappingWidth="175.5">
-                     <font>
+                    </font>
+                </Text>
+                <TextField fx:id="nomAcheteur" layoutX="213.0" layoutY="86.0" prefHeight="26.0" prefWidth="182.0" promptText="Entrez le nom de l'acheteur" />
+                <Label layoutX="248.0" layoutY="59.0" text="Nom de l'acheteur" textFill="#dbfbcb">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="montantSansTaxes" layoutX="240.0" layoutY="160.0" prefHeight="26.0" prefWidth="115.0" promptText="0.00$" text="0.00" />
+                <Label layoutX="244.0" layoutY="135.0" text="Montant sans taxes" textFill="#dbfbcb">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="taxes" layoutX="237.0" layoutY="242.0" prefHeight="25.0" prefWidth="115.0" promptText="0.00$" text="0.00" />
+                <Label layoutX="245.0" layoutY="203.0" prefHeight="36.0" prefWidth="120.0" text="Montant des taxes" textFill="#dbfbcb">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Button fx:id="creer" layoutX="337.0" layoutY="300.0" mnemonicParsing="false" style="-fx-background-color: #dbfbcb;" text="Créer" textFill="#292929" />
+                <Button fx:id="rafraichir" layoutX="227.0" layoutY="300.0" mnemonicParsing="false" style="-fx-background-color: #dbfbcb;" text="Rafraichir" textFill="#292929" />
+                <Pane layoutX="14.0" layoutY="13.0" prefHeight="293.0" prefWidth="170.0" style="-fx-background-color: #dbfbcb;">
+                    <children>
+                        <Text fill="#292929" layoutX="5.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode de Paiement">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                        <RadioButton id="ARGENT" fx:id="argent" layoutX="9.0" layoutY="104.0" mnemonicParsing="false" text="Argent" textFill="#292929">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="ModePaiement" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton id="DEBIT" fx:id="debit" layoutX="8.0" layoutY="150.0" mnemonicParsing="false" text="Débit" textFill="#292929" toggleGroup="$ModePaiement">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </RadioButton>
+                        <RadioButton id="CREDIT" fx:id="credit" layoutX="8.0" layoutY="194.0" mnemonicParsing="false" text="Crédit" textFill="#292929" toggleGroup="$ModePaiement">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </RadioButton>
+                        <Text fx:id="erreurModePaiement" fill="RED" layoutX="8.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.5">
+                            <font>
+                                <Font size="10.5" />
+                            </font>
+                        </Text>
+                    </children>
+                </Pane>
+                <Pane layoutX="416.0" layoutY="13.0" prefHeight="130.0" prefWidth="170.0" style="-fx-background-color: #dbfbcb;">
+                    <children>
+                        <Text fill="#292929" layoutX="63.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dons">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="montantDons" layoutX="5.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="Total : 0,00$" wrappingWidth="159.18994140625">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </Pane>
+                <Pane layoutX="416.0" layoutY="167.0" prefHeight="130.0" prefWidth="170.0" style="-fx-background-color: #dbfbcb;">
+                    <children>
+                        <Text fill="#292929" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant total avec taxes">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="montantTotal" layoutX="5.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="inconnu" wrappingWidth="159.18994140625">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </Pane>
+                <Text fx:id="erreurNomAcheteur" fill="RED" layoutX="212.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.5">
+                    <font>
                         <Font size="10.5" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane layoutX="416.0" layoutY="13.0" prefHeight="130.0" prefWidth="170.0" style="-fx-background-color: #dbfbcb;">
-               <children>
-                  <Text fill="#292929" layoutX="63.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dons">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="34.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="montantDons" text="Total : 0,00$">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane layoutX="416.0" layoutY="167.0" prefHeight="130.0" prefWidth="170.0" style="-fx-background-color: #dbfbcb;">
-               <children>
-                  <Text fill="#292929" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant total avec taxes">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="montantTotal" layoutX="62.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="inconnu">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Text fill="RED" layoutX="231.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="erreurNomAcheteur" wrappingWidth="175.5">
-               <font>
-                  <Font size="10.5" />
-               </font>
-            </Text>
-            <Text fill="RED" layoutX="225.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="erreurMontantSansTaxes" wrappingWidth="175.5">
-               <font>
-                  <Font size="10.5" />
-               </font>
-            </Text>
-            <Text fill="RED" layoutX="229.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="erreurTaxes" wrappingWidth="175.5">
-               <font>
-                  <Font size="10.5" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-   </children>
+                    </font>
+                </Text>
+                <Text fx:id="erreurMontantSansTaxes" fill="RED" layoutX="212.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.5">
+                    <font>
+                        <Font size="10.5" />
+                    </font>
+                </Text>
+                <Text fx:id="erreurTaxes" fill="RED" layoutX="229.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.5">
+                    <font>
+                        <Font size="10.5" />
+                    </font>
+                </Text>
+                <AnchorPane layoutX="598.0" layoutY="13.0" prefHeight="305.0" prefWidth="188.0" style="-fx-background-color: #dbfbcb;">
+                    <children>
+                        <Text layoutX="35.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Derniers Dons">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                        <TextArea fx:id="textArea" disable="true" layoutX="12.0" layoutY="46.0" prefHeight="240.0" prefWidth="163.0" style="-fx-alignment: center; -fx-control-inner-background: #dbfbcb" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
 </VBox>

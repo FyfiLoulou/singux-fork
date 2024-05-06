@@ -1,8 +1,7 @@
 package org.yes.Model;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
 
 /**
  * @author Félix Blanchette
@@ -16,8 +15,7 @@ import java.util.List;
 public class Dons {
 
     private double totalDons; // le total des dons effectués
-    private List<Double> dons = new ArrayList<>();
-
+    private List<Double> dernierDons;
 
     public Dons() {
         this.totalDons = 0;
@@ -31,19 +29,26 @@ public class Dons {
      * @return le nouveau total de dons
      */
     public double ajouterDons(double montant, ModePaiements modePaiements) {
-        double nouveauDon;
-        double fraisModePaiement = 0;
+        double don = calculeDon(montant, modePaiements);
+        dernierDons.add(don);
+        return this.totalDons += don;
+    }
 
+    /**
+     * Calcule le montant du don
+     *
+     * @param montant
+     * @param modePaiements
+     * @return
+     */
+    public double calculeDon(double montant, ModePaiements modePaiements) {
+        double fraisModePaiement = 0;
         if (modePaiements == ModePaiements.DEBIT) {
             fraisModePaiement = montant * 0.01;
         } else if (modePaiements == ModePaiements.CREDIT) {
             fraisModePaiement = montant * 0.03;
         }
-
-        nouveauDon = 0.02 * (montant - fraisModePaiement);
-
-        dons.add(nouveauDon);
-        return this.totalDons += nouveauDon;
+        return 0.02 * (montant - fraisModePaiement);
     }
 
     /**
@@ -60,11 +65,11 @@ public class Dons {
         return totalDons;
     }
 
-    public List<Double> getDons() {
-        return dons;
+    public List<Double> getDernierDons() {
+        return dernierDons;
     }
 
-    public void setDons(List<Double> dons) {
-        this.dons = dons;
+    private void setDernierDons(List<Double> dernierDons) {
+        this.dernierDons = dernierDons;
     }
 }

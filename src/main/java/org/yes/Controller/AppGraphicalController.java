@@ -12,6 +12,7 @@ import org.yes.Model.Facture;
 import org.yes.Model.FacturesFactory;
 import org.yes.Model.ModePaiements;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -186,8 +187,9 @@ public class AppGraphicalController extends AppController {
     }
 
     private void afficherDernierDon() {
-        List<Double> donAAfficher = dons.getDons();
-        String valeur = textArea.textProperty().getValue();
-        textArea.textProperty().setValue(valeur + decfor.format(donAAfficher.get(donAAfficher.size() - 1)) + "\n");
+        Collection<Double> donAAfficher = dons.getDernierDons();
+        donAAfficher.forEach(d -> textArea.textProperty().setValue(decfor.format(d)));
+
+//        textArea.textProperty().setValue(valeur + decfor.format(donAAfficher.get(donAAfficher.size() - 1)) + "\n");
     }
 }
